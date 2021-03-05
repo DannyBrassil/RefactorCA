@@ -663,24 +663,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		return ppsExist;
 		
 	}// end correctPPS
-	
-	
-	
 
-	// check if file name has extension .dat using regex
-	private boolean checkFileName(File fileName) {
-		
-		int length = fileName.toString().length();
-		
-		if(Pattern.matches("\\.dat$", fileName.toString())) {
-			return true;
-		}
-		else {
-			return false;
-		}
-
-		
-	}// end checkFileName
 
 	// check if any changes text field where made
 	private boolean checkForChanges() {
@@ -893,7 +876,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			newFile = fc.getSelectedFile();
 			// check for file name
-			if (!checkFileName(newFile)) {
+			if (!Pattern.matches("\\.dat$", newFile.toString())) {
 				// add .dat extension if it was not there
 				newFile = new File(newFile.getAbsolutePath() + ".dat");
 				// create new file

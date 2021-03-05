@@ -1,13 +1,4 @@
-
-/* * 
- * This is a menu driven system that will allow users to define a data structure representing a collection of 
- * records that can be displayed both by means of a dialog that can be scrolled through and by means of a table
- * to give an overall view of the collection contents.
- * 
- * */
-
 import java.awt.BorderLayout;
-
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -26,7 +17,6 @@ import java.nio.file.StandardCopyOption;
 import java.text.DecimalFormat;
 import java.util.Random;
 import java.util.Vector;
-
 import javax.swing.BorderFactory;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.ImageIcon;
@@ -48,8 +38,8 @@ import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
 import java.util.regex.*; 
-
 import net.miginfocom.swing.MigLayout;
+
 
 public class EmployeeDetails extends JFrame implements ActionListener, ItemListener, DocumentListener, WindowListener {
 	// decimal format for inactive currency text field
@@ -677,16 +667,19 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	
 	
 
-	// check if file name has extension .dat
+	// check if file name has extension .dat using regex
 	private boolean checkFileName(File fileName) {
-		boolean checkFile = false;
+		
 		int length = fileName.toString().length();
+		
+		if(Pattern.matches("\\.dat$", fileName.toString())) {
+			return true;
+		}
+		else {
+			return false;
+		}
 
-		// check if last characters in file name is .dat
-		if (fileName.toString().charAt(length - 4) == '.' && fileName.toString().charAt(length - 3) == 'd'
-				&& fileName.toString().charAt(length - 2) == 'a' && fileName.toString().charAt(length - 1) == 't')
-			checkFile = true;
-		return checkFile;
+		
 	}// end checkFileName
 
 	// check if any changes text field where made

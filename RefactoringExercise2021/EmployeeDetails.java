@@ -7,6 +7,7 @@
  * */
 
 import java.awt.BorderLayout;
+
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -46,6 +47,7 @@ import javax.swing.UIManager;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.filechooser.FileNameExtensionFilter;
+import java.util.regex.*; 
 
 import net.miginfocom.swing.MigLayout;
 
@@ -131,6 +133,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		nextItem.addActionListener(this);
 		navigateMenu.add(lastItem = new JMenuItem("Last"));
 		lastItem.addActionListener(this);
+		
 		navigateMenu.addSeparator();
 		navigateMenu.add(searchById = new JMenuItem("Search by ID")).addActionListener(this);
 		navigateMenu.add(searchBySurname = new JMenuItem("Search by Surname")).addActionListener(this);
@@ -648,31 +651,31 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		}
 		return someoneToDisplay;
 	}// end isSomeoneToDisplay
+	
+	
+	
 
 	// check for correct PPS format and look if PPS already in use
+	//refactor with regex
 	public boolean correctPps(String pps, long currentByte) {
 		boolean ppsExist = false;
 		// check for correct PPS format based on assignment description
-		if (pps.length() == 8 || pps.length() == 9) {
-			if (Character.isDigit(pps.charAt(0)) && Character.isDigit(pps.charAt(1))
-					&& Character.isDigit(pps.charAt(2))	&& Character.isDigit(pps.charAt(3)) 
-					&& Character.isDigit(pps.charAt(4))	&& Character.isDigit(pps.charAt(5)) 
-					&& Character.isDigit(pps.charAt(6))	&& Character.isLetter(pps.charAt(7))
-					&& (pps.length() == 8 || Character.isLetter(pps.charAt(8)))) {
-				// open file for reading
-				application.openReadFile(file.getAbsolutePath());
-				// look in file is PPS already in use
-				ppsExist = application.isPpsExist(pps, currentByte);
-				application.closeReadFile();// close file for reading
-			} // end if
-			else
-				ppsExist = true;
-		} // end if
-		else
+		if(Pattern.matches("^\\d{7}[a-zA-Z]{2}$", pps)) {
+			// open file for reading
+			application.openReadFile(file.getAbsolutePath());
+			// look in file is PPS already in use
+			ppsExist = application.isPpsExist(pps, currentByte);
+			application.closeReadFile();// close file for reading
+		}else
 			ppsExist = true;
+		
 
 		return ppsExist;
+		
 	}// end correctPPS
+	
+	
+	
 
 	// check if file name has extension .dat
 	private boolean checkFileName(File fileName) {

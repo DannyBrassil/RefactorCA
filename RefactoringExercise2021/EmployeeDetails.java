@@ -261,6 +261,8 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		empDetails.add(buttonPanel, "span 2,growx, pushx,wrap");
 
 		// loop through panel components and add listeners and format
+
+		
 		for (int i = 0; i < empDetails.getComponentCount(); i++) {
 			empDetails.getComponent(i).setFont(font1);
 			if (empDetails.getComponent(i) instanceof JTextField) {
@@ -331,7 +333,25 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		}
 		change = false;
 	}// end display records
+	
+	
+	private void displayDialog(String type) {
+		if (isSomeoneToDisplay()) {
+		switch (type) {
+			case "summary" :
+				new EmployeeSummaryDialog(getAllEmloyees());
+				break;
+			case "id" :
+				new SearchByIdDialog(EmployeeDetails.this);
+				break;
+			case "surname" :
+				new SearchBySurnameDialog(EmployeeDetails.this);
+				break;
+			}	
+		}
+	}
 
+	/*
 	// display Employee summary dialog
 	private void displayEmployeeSummaryDialog() {
 		// display Employee summary dialog if these is someone to display
@@ -350,7 +370,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		if (isSomeoneToDisplay())
 			new SearchBySurnameDialog(EmployeeDetails.this);
 	}// end displaySearchBySurnameDialog
-
+*/
 	// find byte start in file for first active record
 	private void firstRecord() {
 		// if any active record in file look for first record
@@ -976,10 +996,10 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			change = false;
 		} else if (e.getSource() == searchById) {
 			if (checkInput() && !checkForChanges())
-				displaySearchByIdDialog();
+				displayDialog("id");
 		} else if (e.getSource() == searchBySurname) {
 			if (checkInput() && !checkForChanges())
-				displaySearchBySurnameDialog();
+				displayDialog("surname");
 		} else if (e.getSource() == searchId || e.getSource() == searchByIdField)
 			searchEmployeeById();
 		else if (e.getSource() == searchSurname || e.getSource() == searchBySurnameField)
@@ -1011,8 +1031,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			}
 		} else if (e.getSource() == listAll || e.getSource() == displayAll) {
 			if (checkInput() && !checkForChanges())
-				if (isSomeoneToDisplay())
-					displayEmployeeSummaryDialog();
+					displayDialog("summary");
 		} else if (e.getSource() == create || e.getSource() == add) {
 			if (checkInput() && !checkForChanges())
 				new AddRecordDialog(EmployeeDetails.this);

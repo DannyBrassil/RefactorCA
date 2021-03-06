@@ -292,27 +292,27 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 	public void displayRecords(Employee thisEmployee) {
 		int countGender = 0;
 		int countDep = 0;
-		boolean found = false;
 
 		searchByIdField.setText("");
 		searchBySurnameField.setText("");
 		// if Employee is null or ID is 0 do nothing else display Employee
 		// details
+		
 		if (thisEmployee == null) {
 		} else if (thisEmployee.getEmployeeId() == 0) {
 		} else {
 			// find corresponding gender combo box value to current employee
-			while (!found && countGender < gender.length - 1) {
+			while ( countGender < gender.length - 1) {
 				if (Character.toString(thisEmployee.getGender()).equalsIgnoreCase(gender[countGender]))
-					found = true;
+					break;
 				else
 					countGender++;
 			} // end while
-			found = false;
+			
 			// find corresponding department combo box value to current employee
-			while (!found && countDep < department.length - 1) {
+			while (countDep < department.length - 1) {
 				if (thisEmployee.getDepartment().trim().equalsIgnoreCase(department[countDep]))
-					found = true;
+					break;
 				else
 					countDep++;
 			} // end while

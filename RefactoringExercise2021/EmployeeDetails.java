@@ -438,9 +438,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				int firstId = currentEmployee.getEmployeeId();
 				// if ID to search is already displayed do nothing else loop
 				// through records
-				if (searchByIdField.getText().trim().equals(idField.getText().trim()))
-					found = true;
-				else if (searchByIdField.getText().trim().equals(Integer.toString(currentEmployee.getEmployeeId()))) {
+				if (searchByIdField.getText().trim().equals(idField.getText().trim())||searchByIdField.getText().trim().equals(Integer.toString(currentEmployee.getEmployeeId()))){
 					found = true;
 					displayRecords(currentEmployee);
 				} // end else if
@@ -481,12 +479,10 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			String firstSurname = currentEmployee.getSurname().trim();
 			// if ID to search is already displayed do nothing else loop through
 			// records
-			if (searchBySurnameField.getText().trim().equalsIgnoreCase(surnameField.getText().trim()))
-				found = true;
-			else if (searchBySurnameField.getText().trim().equalsIgnoreCase(currentEmployee.getSurname().trim())) {
+			if (searchBySurnameField.getText().trim().equalsIgnoreCase(surnameField.getText().trim())||searchBySurnameField.getText().trim().equalsIgnoreCase(currentEmployee.getSurname().trim())) {
 				found = true;
 				displayRecords(currentEmployee);
-			} // end else if
+		}
 			else {
 				nextRecord();// look for next record
 				// loop until Employee found or until all Employees have been
@@ -509,6 +505,8 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		} // end if
 		searchBySurnameField.setText("");
 	}// end searchEmployeeBySurname
+	
+	
 
 	// get next free ID from Employees in the file
 	public int getNextFreeId() {
@@ -947,8 +945,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			int index = (int) (rnd.nextFloat() * fileNameChars.length());
 			fileName.append(fileNameChars.charAt(index));
 		}
-		String generatedfileName = fileName.toString();
-		return generatedfileName;
+		return fileName.toString();
 	}// end getFileName
 
 	// create file with generated file name when application is opened

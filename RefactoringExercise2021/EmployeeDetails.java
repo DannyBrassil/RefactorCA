@@ -293,21 +293,14 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		return empDetails;
 	}// end detailsPanel
 	
-	
-	
-	
-	
-
 	// display current Employee details
 	public void displayRecords(Employee thisEmployee) {
 		int countGender = 0;
 		int countDep = 0;
-
 		searchByIdField.setText("");
 		searchBySurnameField.setText("");
 		// if Employee is null or ID is 0 do nothing else display Employee
 		// details
-		
 		if (thisEmployee == null) {
 		} else if (thisEmployee.getEmployeeId() == 0) {
 		} else {
@@ -342,7 +335,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		change = false;
 	}// end display records
 	
-	
 	private void displayDialog(String type) {
 		if (isSomeoneToDisplay()) {
 		switch (type) {
@@ -358,7 +350,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			}	
 		}
 	}
-
 
 	// search Employee by ID
 	public void searchEmployeeById() {
@@ -451,7 +442,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		searchBySurnameField.setText("");
 	}// end searchEmployeeBySurname
 	
-	
 	// find byte start in file for first active record
 		private void firstRecord() {
 			// if any active record in file look for first record
@@ -511,7 +501,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 		return theEmployee;
 	}// end getChangedDetails
-
 
 	// create vector of vectors with all Employee details
 	private Vector<Object> getAllEmloyees() {
@@ -583,9 +572,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		}
 		return someoneToDisplay;
 	}// end isSomeoneToDisplay
-	
-	
-	
 
 	// check for correct PPS format and look if PPS already in use
 	//refactor with regex
@@ -600,12 +586,8 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			application.closeReadFile();// close file for reading
 		}else
 			ppsExist = true;
-		
-
 		return ppsExist;
-		
 	}// end correctPPS
-
 
 	// check if any changes text field where made
 	private boolean checkForChanges() {
@@ -621,7 +603,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			displayRecords(currentEmployee);
 			return false;
 		} // end else
-
 	}// end checkForChanges
 
 	// check for input in text fields
@@ -677,7 +658,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		// set text field to white colour if text fields are editable
 		if (ppsField.isEditable())
 			setToWhite();
-
 		return valid;
 	}
 

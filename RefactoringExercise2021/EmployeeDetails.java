@@ -559,11 +559,6 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		} // end if
 	}// end editDetails
 
-	// ignore changes and set text field unenabled
-	private void cancelChange() {
-		setEnabled(false);
-		displayRecords(currentEmployee);
-	}// end cancelChange
 
 	// check if any of records in file is active - ID is not 0
 	public boolean isSomeoneToDisplay() {
@@ -937,9 +932,10 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		else if (e.getSource() == saveChange) {
 			if (checkInput() && !checkForChanges())
 				;
-		} else if (e.getSource() == cancelChange)
-			cancelChange();
-		else if ((e.getSource() == firstItem || e.getSource() == first)&&(checkInput() && !checkForChanges())) {
+		} else if (e.getSource() == cancelChange) {
+			setEnabled(false);
+			displayRecords(currentEmployee);
+		}else if ((e.getSource() == firstItem || e.getSource() == first)&&(checkInput() && !checkForChanges())) {
 			record = new RecordOperation(currentEmployee, EmployeeDetails.this ,application, currentByteStart);
 			currentByteStart=record.firstRecord();
 			currentEmployee=record.getCurrentEmployee();

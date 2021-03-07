@@ -2,20 +2,25 @@ import javax.swing.JOptionPane;
 
 public class RecordOperation {
 	
+	Employee currentEmployee;
+	EmployeeDetails ed;
+	RandomFile application;
+	long currentByteStart;
 	
-	
-	public RecordOperation() {
-		
+	public RecordOperation(Employee currentEmployee, EmployeeDetails ed, RandomFile application, long currentByteStart) {
+		this.currentEmployee=currentEmployee;
+		this.ed = ed;
+		this.application=application;
+		this.currentByteStart=currentByteStart;
 	}
 	
-	
-	
+
 	// find byte start in file for first active record
-		private void firstRecord() {
+		public long firstRecord() {
 			// if any active record in file look for first record
-			if (isSomeoneToDisplay()) {
+			if (ed.isSomeoneToDisplay()) {
 				// open file for reading
-				application.openReadFile(file.getAbsolutePath());
+				application.openReadFile(ed.file.getAbsolutePath());
 				// get byte start in file for first record
 				currentByteStart = application.getFirst();
 				// assign current Employee to first record in file
@@ -25,14 +30,15 @@ public class RecordOperation {
 				if (currentEmployee.getEmployeeId() == 0)
 					nextRecord();// look for next record
 			} // end if
+			return currentByteStart;
 		}// end firstRecord
 
 		// find byte start in file for previous active record
-		private void previousRecord() {
+		public long previousRecord() {
 			// if any active record in file look for first record
-			if (isSomeoneToDisplay()) {
+			if (ed.isSomeoneToDisplay()) {
 				// open file for reading
-				application.openReadFile(file.getAbsolutePath());
+				application.openReadFile(ed.file.getAbsolutePath());
 				// get byte start in file for previous record
 				currentByteStart = application.getPrevious(currentByteStart);
 				// assign current Employee to previous record in file
@@ -46,14 +52,15 @@ public class RecordOperation {
 				} // end while
 				application.closeReadFile();// close file for reading
 			}
+			return currentByteStart;
 		}// end previousRecord
 
 		// find byte start in file for next active record
-		private void nextRecord() {
+		public long nextRecord() {
 			// if any active record in file look for first record
-			if (isSomeoneToDisplay()) {
+			if (ed.isSomeoneToDisplay()) {
 				// open file for reading
-				application.openReadFile(file.getAbsolutePath());
+				application.openReadFile(ed.file.getAbsolutePath());
 				// get byte start in file for next record
 				currentByteStart = application.getNext(currentByteStart);
 				// assign current Employee to record in file
@@ -67,14 +74,15 @@ public class RecordOperation {
 				} // end while
 				application.closeReadFile();// close file for reading
 			} // end if
+			return currentByteStart;
 		}// end nextRecord
 
 		// find byte start in file for last active record
-		private void lastRecord() {
+		public long lastRecord() {
 			// if any active record in file look for first record
-			if (isSomeoneToDisplay()) {
+			if (ed.isSomeoneToDisplay()) {
 				// open file for reading
-				application.openReadFile(file.getAbsolutePath());
+				application.openReadFile(ed.file.getAbsolutePath());
 				// get byte start in file for last record
 				currentByteStart = application.getLast();
 				// assign current Employee to first record in file
@@ -84,38 +92,44 @@ public class RecordOperation {
 				if (currentEmployee.getEmployeeId() == 0)
 					previousRecord();// look for previous record
 			} // end if
+			return currentByteStart;
 		}// end lastRecord
 
 	
 	// add Employee object to fail
-		public void addRecord(Employee newEmployee) {
+		public long addRecord(Employee newEmployee) {
 			// open file for writing
-			application.openWriteFile(file.getAbsolutePath());
+			application.openWriteFile(ed.file.getAbsolutePath());
 			// write into a file
 			currentByteStart = application.addRecords(newEmployee);
 			application.closeWriteFile();// close file for writing
+			return currentByteStart;
 		}// end addRecord
 		
-		private void deleteRecord() {
-			if (isSomeoneToDisplay()) {// if any active record in file display
+		public void deleteRecord() {
+			if (ed.isSomeoneToDisplay()) {// if any active record in file display
 										// message and delete record
-				int returnVal = JOptionPane.showOptionDialog(frame, "Do you want to delete record?", "Delete",
+				int returnVal = JOptionPane.showOptionDialog(ed.frame, "Do you want to delete record?", "Delete",
 						JOptionPane.YES_NO_OPTION, JOptionPane.INFORMATION_MESSAGE, null, null, null);
 				// if answer yes delete (make inactive - empty) record
 				if (returnVal == JOptionPane.YES_OPTION) {
 					// open file for writing
-					application.openWriteFile(file.getAbsolutePath());
+					application.openWriteFile(ed.file.getAbsolutePath());
 					// delete (make inactive - empty) record in file proper position
 					application.deleteRecords(currentByteStart);
 					application.closeWriteFile();// close file for writing
 					// if any active record in file display next record
-					if (isSomeoneToDisplay()) {
+					if (ed.isSomeoneToDisplay()) {
 						nextRecord();// look for next record
-						displayRecords(currentEmployee);
+						ed.displayRecords(currentEmployee);
 					} // end if
 				} // end if
 			} // end if
 		}// end deleteDecord
+		
+		public Employee getCurrentEmployee() {
+			return currentEmployee;
+		}
 
 
 }

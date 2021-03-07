@@ -614,20 +614,19 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 	// check if any changes text field where made
 	private boolean checkForChanges() {
-		boolean anyChanges = false;
 		// if changes where made, allow user to save there changes
 		if (change) {
 			saveChanges();// save changes
-			anyChanges = true;
+			return true;
 		} // end if
 			// if no changes made, set text fields as unenabled and display
 			// current Employee
 		else {
 			setEnabled(false);
 			displayRecords(currentEmployee);
+			return false;
 		} // end else
 
-		return anyChanges;
 	}// end checkForChanges
 
 	// check for input in text fields

@@ -979,14 +979,11 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 
 	// action listener for buttons, text field and menu items
 	public void actionPerformed(ActionEvent e) {
-
-		if (e.getSource() == closeApp) {
-			if (checkInput() && !checkForChanges())
+		if ((e.getSource() == closeApp)&&(checkInput() && !checkForChanges())) {
 				exitApp();
-		} else if (e.getSource() == open) {
-			if (checkInput() && !checkForChanges())
+		} else if ((e.getSource() == open)&&(checkInput() && !checkForChanges())) {
 				openFile();
-		} else if (e.getSource() == save) {
+		} else if ((e.getSource() == save)&&(checkInput() && !checkForChanges())) {
 			if (checkInput() && !checkForChanges())
 				saveFile();
 			change = false;
@@ -994,11 +991,9 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 			if (checkInput() && !checkForChanges())
 				saveFileAs();
 			change = false;
-		} else if (e.getSource() == searchById) {
-			if (checkInput() && !checkForChanges())
+		} else if ((e.getSource() == searchById)&&(checkInput() && !checkForChanges())) {
 				displayDialog("id");
-		} else if (e.getSource() == searchBySurname) {
-			if (checkInput() && !checkForChanges())
+		} else if ((e.getSource() == searchBySurname)&&(checkInput() && !checkForChanges())) {
 				displayDialog("surname");
 		} else if (e.getSource() == searchId || e.getSource() == searchByIdField)
 			searchEmployeeById();
@@ -1009,40 +1004,27 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 				;
 		} else if (e.getSource() == cancelChange)
 			cancelChange();
-		else if (e.getSource() == firstItem || e.getSource() == first) {
-			if (checkInput() && !checkForChanges()) {
+		else if ((e.getSource() == firstItem || e.getSource() == first)&&(checkInput() && !checkForChanges())) {
 				firstRecord();
 				displayRecords(currentEmployee);
-			}
-		} else if (e.getSource() == prevItem || e.getSource() == previous) {
-			if (checkInput() && !checkForChanges()) {
+		} else if ((e.getSource() == prevItem || e.getSource() == previous)&&(checkInput() && !checkForChanges())) {
 				previousRecord();
 				displayRecords(currentEmployee);
-			}
-		} else if (e.getSource() == nextItem || e.getSource() == next) {
-			if (checkInput() && !checkForChanges()) {
+		} else if ((e.getSource() == nextItem || e.getSource() == next)&&(checkInput() && !checkForChanges())) {
 				nextRecord();
 				displayRecords(currentEmployee);
-			}
-		} else if (e.getSource() == lastItem || e.getSource() == last) {
-			if (checkInput() && !checkForChanges()) {
+		} else if ((e.getSource() == lastItem || e.getSource() == last)&&(checkInput() && !checkForChanges())) {
 				lastRecord();
 				displayRecords(currentEmployee);
-			}
-		} else if (e.getSource() == listAll || e.getSource() == displayAll) {
-			if (checkInput() && !checkForChanges())
+		} else if ((e.getSource() == listAll || e.getSource() == displayAll)&&(checkInput() && !checkForChanges())) {
 					displayDialog("summary");
-		} else if (e.getSource() == create || e.getSource() == add) {
-			if (checkInput() && !checkForChanges())
+		} else if ((e.getSource() == create || e.getSource() == add)&&(checkInput() && !checkForChanges())) {
 				new AddRecordDialog(EmployeeDetails.this);
-		} else if (e.getSource() == modify || e.getSource() == edit) {
-			if (checkInput() && !checkForChanges())
+		} else if ((e.getSource() == modify || e.getSource() == edit)&&(checkInput() && !checkForChanges())) {
 				editDetails();
-		} else if (e.getSource() == delete || e.getSource() == deleteButton) {
-			if (checkInput() && !checkForChanges())
+		} else if ((e.getSource() == delete || e.getSource() == deleteButton)&&(checkInput() && !checkForChanges())) {
 				deleteRecord();
-		} else if (e.getSource() == searchBySurname) {
-			if (checkInput() && !checkForChanges())
+		} else if ((e.getSource() == searchBySurname)&&(checkInput() && !checkForChanges())) {
 				new SearchBySurnameDialog(EmployeeDetails.this);
 		}
 	}// end actionPerformed

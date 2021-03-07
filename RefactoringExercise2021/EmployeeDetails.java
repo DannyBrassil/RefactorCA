@@ -990,7 +990,7 @@ public class EmployeeDetails extends JFrame implements ActionListener, ItemListe
 		} else if (e.getSource() == saveAs) {
 			if (checkInput() && !checkForChanges())
 				saveFileAs();
-			change = false;
+			change = false; 
 		} else if ((e.getSource() == searchById)&&(checkInput() && !checkForChanges())) {
 				displayDialog("id");
 		} else if ((e.getSource() == searchBySurname)&&(checkInput() && !checkForChanges())) {
